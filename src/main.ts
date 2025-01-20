@@ -4,16 +4,12 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
-  app.enableCors();
-
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true, // Bỏ qua các field không có trong DTO
-      forbidNonWhitelisted: true, // Báo lỗi nếu có field lạ
-      transform: true, // Convert dữ liệu về đúng kiểu DTO
-    }),
-  );
-  await app.listen(process.env.PORT ?? 6060);
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Accept',
+  });
+  app.useGlobalPipes(new ValidationPipe());
+  await app.listen(3333);
 }
 bootstrap();

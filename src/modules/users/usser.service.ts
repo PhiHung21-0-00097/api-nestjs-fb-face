@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserDocument } from './user.entity';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { StatusResponse } from 'src/common/enums/StatusResponse.enum';
+import { StatusResponse } from '../../common/enums/StatusResponse.enum';
 
 @Injectable()
 export class UserService {

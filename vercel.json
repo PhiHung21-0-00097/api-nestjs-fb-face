@@ -1,8 +1,5 @@
 {
   "version": 2,
-  "env": {
-    "MONGO_URI": "@test-api-fb-fake"
-  },
   "builds": [
     {
       "src": "dist/main.js",

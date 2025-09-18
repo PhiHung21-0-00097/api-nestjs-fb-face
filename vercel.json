@@ -3,6 +3,12 @@
   "env": {
     "DB_URL": "mongodb+srv://otisnguyen:132123%40@api-fb-fake.asrtg1r.mongodb.net/"
   },
-  "builds": [{ "src": "api/index.ts", "use": "@vercel/node" }],
-  "routes": [{ "src": "/(.*)", "dest": "/api/index.ts" }]
+  "builds": [{ "src": "src/api/index.ts", "use": "@vercel/node" }],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/api/index.ts",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
+    }
+  ]
 }

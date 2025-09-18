@@ -1,12 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { Callback, Context, Handler } from 'aws-lambda';
 import serverlessExpress from '@vendia/serverless-express';
 
-let cachedServer: any;
+let server: Handler;
 
-async function bootstrapServer() {
-  if (!cachedServer) {
+async function bootstrap(): Promise<Handler> {
+  if (!server) {
     const app = await NestFactory.create(AppModule);
     app.enableCors({
       origin: '*',
@@ -16,13 +17,19 @@ async function bootstrapServer() {
     app.useGlobalPipes(new ValidationPipe());
     await app.init();
     const expressApp = app.getHttpAdapter().getInstance();
-    cachedServer = serverlessExpress({ app: expressApp });
+    server = serverlessExpress({ app: expressApp });
   }
-  return cachedServer;
+  return server;
 }
 
-// ✅ Vercel yêu cầu default export
-export default async function handler(req: any, res: any) {
-  const server = await bootstrapServer();
-  return server(req, res);
-}
+const handler: Handler = async (
+  event: any,
+  context: Context,
+  callback: Callback,
+) => {
+  const server = await bootstrap();
+  return server(event, context, callback);
+};
+
+// ✅ Xuất default cho Vercel
+export default handler;

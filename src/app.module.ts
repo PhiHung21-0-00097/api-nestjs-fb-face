@@ -8,12 +8,25 @@ import { UserModule } from './modules/users/user.module';
 
 @Module({
   imports: [
-    JwtModule.register({
-      global: true,
-      secret: process.env.JWT_SECRET_KEY,
-      signOptions: { expiresIn: process.env.EXPIRES_ACCESS_TOKEN_JWT },
+    // Luôn để đầu tiên
+    ConfigModule.forRoot({
+      isGlobal: true,
     }),
-    UserModule,
+
+    // JWT
+    JwtModule.registerAsync({
+      global: true,
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET_KEY'),
+        signOptions: {
+          expiresIn: configService.get<string>('EXPIRES_ACCESS_TOKEN_JWT'),
+        },
+      }),
+      inject: [ConfigService],
+    }),
+
+    // Mongoose
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -25,9 +38,9 @@ import { UserModule } from './modules/users/user.module';
       }),
       inject: [ConfigService],
     }),
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
+
+    // Các module khác
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

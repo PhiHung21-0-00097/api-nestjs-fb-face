@@ -1,7 +1,7 @@
 {
   "version": 2,
   "env": {
-    "DB_URL": "mongodb+srv://api-fb-face:123123123@test-api-fb-fake.xwt0b.mongodb.net/?retryWrites=true&w=majority&appName=test-api-fb-fake"
+    "DB_URL": "mongodb+srv://otisnguyen:132123%40@api-fb-fake.asrtg1r.mongodb.net/"
   },
   "builds": [
     {

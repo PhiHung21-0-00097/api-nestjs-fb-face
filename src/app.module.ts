@@ -5,6 +5,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from './modules/users/user.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { ChatModule } from './modules/chat/chat.module';
 
 @Module({
   imports: [
@@ -41,6 +43,8 @@ import { UserModule } from './modules/users/user.module';
 
     // Các module khác
     UserModule,
+    AuthModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],

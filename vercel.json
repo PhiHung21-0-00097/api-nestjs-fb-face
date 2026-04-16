@@ -1,7 +1,7 @@
 {
   "version": 2,
   "env": {
-    "DB_URL": "mongodb+srv://otisnguyen:132123%40@api-fb-fake.asrtg1r.mongodb.net/"
+    "DB_URL": "mongodb+srv://0943244904hung_db_user:0943244904@nha-hang.1jjxkqq.mongodb.net/nha_hang"
   },
   "builds": [{ "src": "src/api/index.ts", "use": "@vercel/node" }],
   "routes": [

@@ -1,10 +1,14 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { UserService } from '../users/usser.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly jwtService: JwtService) {} // ✅ inject JwtService
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly usersService: UserService,
+  ) {}
 
   async validateUser(username: string, password: string) {
     const user = {
@@ -20,14 +24,22 @@ export class AuthService {
   }
 
   async login({ username, password }: { username: string; password: string }) {
-    // ✅ Kiểm tra user ở DB (ví dụ hardcode trước)
-    if (username !== 'admin' || password !== '123123@') {
-      throw new UnauthorizedException('Sai username hoặc password');
+    // 🔍 tìm user trong DB
+    const user = await this.usersService.findByUsername(username);
+
+    // ❌ không có user
+    if (!user) {
+      throw new UnauthorizedException('Sai tài khoản hoặc mật khẩu');
     }
 
-    // ✅ Tạo JWT token
-    const payload = { id: '123123', username };
-    console.log('payload', payload);
+    // ❌ sai password
+    if (user.password !== password) {
+      throw new UnauthorizedException('Sai tài khoản hoặc mật khẩu');
+    }
+
+    // ✅ tạo token
+    const payload = { id: user._id, username: user.username };
+
     return {
       access_token: this.jwtService.sign(payload),
     };

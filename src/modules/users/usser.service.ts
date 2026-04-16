@@ -30,4 +30,12 @@ export class UserService {
       );
     }
   }
+
+  findByUsername(username: string) {
+    return this.userModel.findOne({ username });
+  }
+
+  create(data: { username: string; password: string }) {
+    return this.userModel.create(data);
+  }
 }

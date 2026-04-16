@@ -7,6 +7,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from './modules/users/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ChatModule } from './modules/chat/chat.module';
+import { TablesModule } from './modules/tables/tables.module';
+import { MenuModule } from './modules/menu/menu.module';
+import { OrdersModule } from './modules/orders/orders.module';
 
 @Module({
   imports: [
@@ -45,6 +48,9 @@ import { ChatModule } from './modules/chat/chat.module';
     UserModule,
     AuthModule,
     ChatModule,
+    TablesModule,
+    OrdersModule,
+    MenuModule,
   ],
   controllers: [AppController],
   providers: [AppService],

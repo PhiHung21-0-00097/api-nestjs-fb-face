@@ -13,9 +13,9 @@ async function bootstrap() {
       allowedHeaders: 'Content-Type, Accept',
     });
 
-    // app.setGlobalPrefix('/');
+    app.setGlobalPrefix('/api/v1');
     app.useGlobalPipes(new ValidationPipe());
-    // await app.init();
+    await app.init();
     appServer = app.getHttpAdapter().getInstance(); // Express instance
   }
   return appServer;

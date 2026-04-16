@@ -1,2 +1,2 @@
-// import handler from '../main';
-// export default handler;
+import handler from '../main';
+export default handler;

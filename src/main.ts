@@ -1,3 +1,4 @@
+// deploy vercel
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
@@ -26,6 +27,8 @@ export default async function handler(req: any, res: any) {
   const appServer = await bootstrap();
   return appServer(req, res); // Trả về Express app
 }
+
+// Local
 // import { NestFactory } from '@nestjs/core';
 // import { AppModule } from './app.module';
 // import { ValidationPipe } from '@nestjs/common';

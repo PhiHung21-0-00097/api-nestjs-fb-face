@@ -75,6 +75,7 @@ export class OrdersService {
     return order;
   }
 
+  // lấy tất cả order đã thanh toán
   async findPaidOrders() {
     return this.orderModel.find({ status: 'paid' });
   }

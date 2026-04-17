@@ -3,15 +3,15 @@
   "env": {
     "DB_URL": "mongodb+srv://0943244904hung_db_user:0943244904@nha-hang.1jjxkqq.mongodb.net/nha_hang"
   },
-  "builds": [{ "src": "src/main.ts", "use": "@vercel/node" }],
+  "builds": [{ "src": "src/api/index.ts", "use": "@vercel/node" }],
   "routes": [
     {
       "src": "/api/v1/(.*)",
-      "dest": "src/main.ts"
+      "dest": "src/api/index.ts"
     },
     {
       "src": "/(.*)",
-      "dest": "src/main.ts",
+      "dest": "src/api/index.ts",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
     }
   ]

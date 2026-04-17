@@ -19,4 +19,9 @@ export class OrdersController {
   pay(@Param('tableId') tableId: string) {
     return this.service.pay(tableId);
   }
+
+  @Get('paid')
+  async getPaidOrders() {
+    return this.service.findPaidOrders();
+  }
 }

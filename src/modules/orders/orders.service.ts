@@ -74,4 +74,8 @@ export class OrdersService {
 
     return order;
   }
+
+  async findPaidOrders() {
+    return this.orderModel.find({ status: 'paid' });
+  }
 }
